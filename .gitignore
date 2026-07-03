@@ -4,4 +4,4 @@
 .env
 .vscode
 vscodeartifacts/flight_price_model.joblib
-artifacts/*
+artifacts
