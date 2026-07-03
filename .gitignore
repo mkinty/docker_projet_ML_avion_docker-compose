@@ -1,0 +1,7 @@
+**/.venv
+**/.env
+**__pycache__
+.env
+.vscode
+vscodeartifacts/flight_price_model.joblib
+artifacts

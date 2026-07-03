@@ -1,0 +1,17 @@
+{
+    "name": "Frontend (Hot Reload)",
+    "dockerComposeFile": "../../docker-compose.yml",
+    "service": "frontend",
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/app/.venv/bin/python"
+            },
+            "extensions": [
+                "ms-python.python"
+            ]
+        }
+    },
+    "remoteUser": "root"
+}

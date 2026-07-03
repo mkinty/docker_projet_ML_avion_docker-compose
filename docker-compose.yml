@@ -1,0 +1,40 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend
+    image: mon_image_backend_avancee:1.0
+    volumes:
+      - ./artifacts:/app/artifacts
+      - ./backend:/app
+      - /app/.venv
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    environment:
+      UVICORN_HOST: 0.0.0.0
+      UVICORN_PORT: 8000
+      UVICORN_RELOAD: true
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend
+    image: mon_image_frontend_avancee:1.0
+    ports:
+      - "8501:8501"
+    environment:
+      API_URL: http://backend:8000
+      STREAMLIT_SERVER_PORT: 8501
+      STREAMLIT_SERVER_HOST: 0.0.0.0
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - ./frontend:/app
+      - /app/.venv
